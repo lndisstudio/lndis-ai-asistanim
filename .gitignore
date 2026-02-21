@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Electron
+ui/dist/
+ui/out/
+
+# Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+
+# Built installers
+installer/windows/build/
+installer/linux/build/
+*.spec
+
+# Backup files
+*.backup.*
+
+# Temporary
+tmp/
+temp/

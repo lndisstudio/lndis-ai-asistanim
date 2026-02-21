@@ -1,0 +1,104 @@
+# ── Lndis AI Assistant – Full Authority Security Policy ──
+# Principal: Action-oriented, User-trusted.
+
+workspace:
+  windows: "C:\\Users\\{username}\\lndis-workspace"
+  linux:   "~/lndis-workspace"
+
+# ── Protected system directories (Extra safety, but assistant can read) ──
+protected_paths:
+  windows:
+    - "C:\\Windows"
+    - "C:\\Program Files"
+    - "C:\\Program Files (x86)"
+  linux:
+    - "/bin"
+    - "/sbin"
+    - "/usr"
+    - "/etc"
+
+# ── File operations ──
+file_read:
+  enabled: true
+  max_size_mb: 100
+  blocked_extensions: []
+
+file_write:
+  enabled: true
+  workspace_only: false         # ALLOWED to write to Desktop, Documents, etc.
+  max_size_mb: 50
+  auto_backup: true
+  blocked_extensions: []
+
+# ── DELETE ──
+delete:
+  enabled: true                 # ENABLED as requested
+
+# ── Command execution ──
+command_run:
+  enabled: true
+  requires_approval: false      # NO APPROVAL NEEDED
+  dry_run_first: false
+  max_timeout_sec: 300
+  # Massive allowlist
+  allowlist:
+    - "dir"
+    - "ls"
+    - "cat"
+    - "type"
+    - "echo"
+    - "find"
+    - "findstr"
+    - "grep"
+    - "where"
+    - "which"
+    - "whoami"
+    - "hostname"
+    - "systeminfo"
+    - "uname"
+    - "python"
+    - "pip"
+    - "node"
+    - "npm"
+    - "code"
+    - "notepad"
+    - "calc"
+    - "explorer"
+    - "start"
+    - "powershell"
+    - "cmd"
+    - "mkdir"
+    - "rm"
+    - "del"
+    - "move"
+    - "copy"
+    - "tasklist"
+    - "taskkill"
+    - "netstat"
+    - "ipconfig"
+    - "git"
+    - "winget"
+    - "apt"
+    - "curl"
+    - "wget"
+    - "ssh"
+  # Gevşetilmiş kısıtlamalar
+  blocked_chars: []
+
+# ── Application installation ──
+install_app:
+  enabled: true
+  requires_approval: false
+  allowed_managers:
+    - "winget"
+    - "apt"
+  blocked_apps: []
+
+# ── Network / research ──
+network:
+  enabled: true                 # ON by default
+
+# ── Global limits ──
+limits:
+  max_plan_steps: 30
+  rate_limit_per_minute: 100

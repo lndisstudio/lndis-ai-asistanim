@@ -1,0 +1,7 @@
+pyyaml
+pytest
+customtkinter
+pyinstaller
+pyttsx3
+SpeechRecognition
+pyaudio
