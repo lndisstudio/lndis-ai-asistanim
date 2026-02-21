@@ -4,8 +4,6 @@ command_run — Execute a shell command with allowlist + dry-run + approval.
 
 from __future__ import annotations
 
-import platform
-import shlex
 import subprocess
 from typing import Any
 
@@ -48,8 +46,8 @@ class CommandRunTool(Tool):
         if not ok:
             return {"ok": False, "error": reason}
 
-        # Cap timeout
-        cfg_max = 120
+        # Cap timeout by policy
+        cfg_max = int(self._policy._cfg.get("command_run", {}).get("max_timeout_sec", 120))
         timeout = min(timeout, cfg_max)
 
         try:
@@ -58,7 +56,7 @@ class CommandRunTool(Tool):
                 capture_output=True,
                 text=True,
                 timeout=timeout,
-                shell=(platform.system() == "Windows"),
+                shell=False,
             )
             return {
                 "ok": True,
