@@ -1,21 +1,22 @@
-# ── Lndis AI Assistant – Full Authority Security Policy ──
-# Principal: Action-oriented, User-trusted.
+# ── Lndis AI Assistant – Default Security Policy (deny-first) ──
 
 workspace:
   windows: "C:\\Users\\{username}\\lndis-workspace"
-  linux:   "~/lndis-workspace"
+  linux: "~/lndis-workspace"
 
-# ── Protected system directories (Extra safety, but assistant can read) ──
+# ── Protected system directories (never writable) ──
 protected_paths:
   windows:
     - "C:\\Windows"
     - "C:\\Program Files"
     - "C:\\Program Files (x86)"
+    - "C:\\ProgramData"
   linux:
     - "/bin"
     - "/sbin"
     - "/usr"
     - "/etc"
+    - "/boot"
 
 # ── File operations ──
 file_read:
@@ -25,22 +26,21 @@ file_read:
 
 file_write:
   enabled: true
-  workspace_only: false         # ALLOWED to write to Desktop, Documents, etc.
+  workspace_only: true
   max_size_mb: 50
   auto_backup: true
   blocked_extensions: []
 
 # ── DELETE ──
 delete:
-  enabled: true                 # ENABLED as requested
+  enabled: false
 
 # ── Command execution ──
 command_run:
   enabled: true
-  requires_approval: false      # NO APPROVAL NEEDED
-  dry_run_first: false
-  max_timeout_sec: 300
-  # Massive allowlist
+  requires_approval: true
+  dry_run_first: true
+  max_timeout_sec: 120
   allowlist:
     - "dir"
     - "ls"
@@ -58,37 +58,19 @@ command_run:
     - "uname"
     - "python"
     - "pip"
-    - "node"
-    - "npm"
-    - "code"
-    - "notepad"
-    - "calc"
-    - "explorer"
-    - "start"
-    - "powershell"
-    - "cmd"
-    - "mkdir"
-    - "rm"
-    - "del"
-    - "move"
-    - "copy"
-    - "tasklist"
-    - "taskkill"
-    - "netstat"
-    - "ipconfig"
     - "git"
-    - "winget"
-    - "apt"
-    - "curl"
-    - "wget"
-    - "ssh"
-  # Gevşetilmiş kısıtlamalar
-  blocked_chars: []
+  blocked_chars:
+    - ";"
+    - "|"
+    - "&"
+    - ">"
+    - "<"
+    - "`"
 
 # ── Application installation ──
 install_app:
   enabled: true
-  requires_approval: false
+  requires_approval: true
   allowed_managers:
     - "winget"
     - "apt"
@@ -96,9 +78,9 @@ install_app:
 
 # ── Network / research ──
 network:
-  enabled: true                 # ON by default
+  enabled: false
 
 # ── Global limits ──
 limits:
-  max_plan_steps: 30
-  rate_limit_per_minute: 100
+  max_plan_steps: 20
+  rate_limit_per_minute: 30
