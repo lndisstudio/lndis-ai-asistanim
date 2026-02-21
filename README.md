@@ -118,6 +118,17 @@ See [SECURITY.md](SECURITY.md) for the full security documentation.
 └── README.md             # This file
 ```
 
+
+## Releases & Packages
+
+- Current release version: **0.1** (`VERSION` file).
+- Windows build artifact name: `dist/LndisAI-v0.1.exe`.
+- Build command:
+
+```bash
+python build.py
+```
+
 ## Running Tests
 
 ```bash
